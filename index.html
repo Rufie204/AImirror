@@ -4,12 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AI Emotion Recognition - AI & Robotics Club</title>
+
+  <!-- React & Babel -->
   <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- 👇 Added face-api.js -->
+
+  <!-- Face API -->
   <script defer src="https://cdn.jsdelivr.net/npm/face-api.js"></script>
+
   <style>
     @keyframes pulse {
       0%, 100% { opacity: 1; }
@@ -46,21 +52,21 @@
           "Every storm runs out of rain. This too shall pass. 🌈",
           "You are stronger than you know. Better days are coming. 💪",
           "It's okay to not be okay. Take your time, you've got this. 🌸",
-          "Tough times don't last, but tough people do. You're one of them. 🌻",
+          "Tough times don't last, but tough people do. 🌻",
           "The sun will rise again, and so will you. 🌅"
         ],
         mad: [
           "Take a deep breath. You have the power to choose peace. 🌊",
-          "Your calm mind is your superpower. You've got this. 🧘",
-          "This feeling is temporary. Your peace is permanent. Choose it. ☮️",
-          "Let it go. You deserve tranquility and happiness. 🕊️",
-          "Breathe in calm, breathe out frustration. You're in control. 🌬️"
+          "Your calm mind is your superpower. 🧘",
+          "This feeling is temporary. Choose peace. ☮️",
+          "Let it go. You deserve happiness. 🕊️",
+          "Breathe in calm, breathe out frustration. 🌬️"
         ],
         neutral: [
           "You are exactly where you need to be right now. 🌟",
-          "Every moment is a fresh beginning. Make it count! ⏳",
-          "Your potential is limitless. Believe in yourself! 💎",
-          "Today is full of possibilities. Embrace them! 🌈",
+          "Every moment is a fresh beginning. ⏳",
+          "Your potential is limitless. 💎",
+          "Today is full of possibilities. 🌈",
           "You are capable of amazing things! 💎"
         ]
       };
@@ -72,7 +78,7 @@
         neutral: 'from-indigo-500 via-purple-600 to-pink-600'
       };
 
-      // 🧠 Load face-api models
+      // 🧠 Load models
       useEffect(() => {
         const loadModels = async () => {
           try {
@@ -115,7 +121,7 @@
         setIsWebcamActive(false);
       };
 
-      // 🎯 Real emotion detection using face-api.js
+      // 🎯 Real detection
       const detectEmotions = async () => {
         const interval = setInterval(async () => {
           if (!videoRef.current || !streamRef.current) {
@@ -135,112 +141,3 @@
           } catch (err) {
             console.error("Detection error:", err);
           }
-        }, 2000);
-      };
-
-      return (
-        <div className="min-h-screen bg-black relative overflow-hidden">
-          <div className="absolute inset-0 opacity-60">
-            <div className="absolute inset-0 bg-gradient-to-b from-indigo-900 via-purple-900 to-black"></div>
-          </div>
-
-          <div className="relative z-10 p-8">
-            <div className="max-w-6xl mx-auto">
-              <div className="text-center mb-8">
-                <h1 className="text-5xl font-bold bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-4">
-                  ✨ AI Emotion Recognition ✨
-                </h1>
-                <p className="text-cyan-300 text-lg font-light tracking-wide">
-                  🤖 AI & Robotics Club • Neural Network Emotion Analysis 🚀
-                </p>
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-8">
-                <div className="bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 rounded-2xl shadow-2xl p-6 border-2 border-cyan-500 border-opacity-30 backdrop-blur-sm">
-                  <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-2xl font-semibold text-cyan-300">📹 Camera Feed</h2>
-                  </div>
-
-                  <div className="relative bg-black rounded-xl overflow-hidden aspect-video mb-4 border-2 border-purple-500 border-opacity-40">
-                    {!isWebcamActive ? (
-                      <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-gray-900 to-black">
-                        <div className="text-center">
-                          <div className="text-6xl mb-4 animate-pulse">📷</div>
-                          <p className="text-cyan-300">Neural Network Standby</p>
-                        </div>
-                      </div>
-                    ) : (
-                      <>
-                        <video
-                          ref={videoRef}
-                          autoPlay
-                          playsInline
-                          muted
-                          className="w-full h-full object-cover"
-                        />
-                        <div className="absolute top-0 left-0 right-0 bottom-0 border-4 border-cyan-500 opacity-30 pointer-events-none"></div>
-                        <div className="absolute top-2 left-2 bg-black bg-opacity-70 px-3 py-1 rounded text-cyan-400 text-sm font-mono">
-                          🟢 SCANNING...
-                        </div>
-                      </>
-                    )}
-                  </div>
-
-                  {error && (
-                    <div className="bg-red-900 bg-opacity-50 border border-red-500 text-red-300 px-4 py-3 rounded mb-4">
-                      {error}
-                    </div>
-                  )}
-
-                  <button
-                    onClick={isWebcamActive ? stopWebcam : startWebcam}
-                    className={`w-full py-3 px-6 rounded-xl font-semibold text-white transition-all transform hover:scale-105 shadow-lg ${
-                      isWebcamActive
-                        ? 'bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700'
-                        : 'bg-gradient-to-r from-cyan-500 via-blue-600 to-purple-600 hover:from-cyan-600 hover:via-blue-700 hover:to-purple-700'
-                    }`}
-                  >
-                    {isWebcamActive ? '⏹ Deactivate Neural Scan' : '▶ Activate Neural Scan'}
-                  </button>
-
-                  {isWebcamActive && (
-                    <p className="text-sm text-cyan-400 mt-4 text-center font-mono">
-                      ⚡ AI Model: Real Emotion Detection Active
-                    </p>
-                  )}
-                </div>
-
-                <div className="space-y-6">
-                  <div className={`bg-gradient-to-br ${emotionColors[emotion]} rounded-2xl shadow-2xl p-8 text-white transform transition-all duration-500 border-2 border-white border-opacity-20`}>
-                    <div className="text-center">
-                      <div className="text-6xl mb-4">
-                        {emotion === 'happy' && '😊'}
-                        {emotion === 'sad' && '😢'}
-                        {emotion === 'mad' && '😠'}
-                        {emotion === 'neutral' && '😐'}
-                      </div>
-                      <h2 className="text-2xl font-bold mb-2 font-mono tracking-wider">DETECTED STATE</h2>
-                      <p className="text-6xl font-extrabold capitalize tracking-wide drop-shadow-lg">{emotion}</p>
-                    </div>
-                  </div>
-
-                  <div className="bg-gradient-to-br from-gray-900 via-indigo-900 to-gray-900 rounded-2xl shadow-2xl p-8 border-2 border-purple-500 border-opacity-30">
-                    <h3 className="text-2xl font-semibold text-transparent bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text mb-4 text-center">
-                      ✨ AI-Generated Inspiration
-                    </h3>
-                    <p className="text-xl text-cyan-100 leading-relaxed px-4 py-4 text-center font-medium">
-                      {quote}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      );
-    };
-
-    ReactDOM.render(<EmotionQuoteApp />, document.getElementById("root"));
-  </script>
-</body>
-</html>
