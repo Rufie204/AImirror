@@ -203,7 +203,7 @@
           const list = quotes[detected] || quotes.neutral;
           quoteEl.innerHTML = list[Math.floor(Math.random() * list.length)].replace(/\n/g, "<br>");
         }
-      }, 10000);
+      }, 5000);
     }
 
     document.getElementById("startBtn").addEventListener("click", startVideo);
