@@ -99,7 +99,7 @@
 </head>
 
 <body>
-  <h1 class="text-3xl font-bold text-cyan-400 mb-2">✨ AI Emotion Recognition ✨</h1>
+  <h1 class="text-3xl font-bold text-cyan-400 mb-2">⭐ AI Emotion Recognition ⭐</h1>
   <p class="text-cyan-300 mb-4">🤖 RAIC - AI & Robotics Club • Neural Network Emotion Analysis 🚀</p>
 
   <div class="container">
@@ -114,7 +114,7 @@
         <p id="emotion">😐 Neutral</p>
       </div>
       <div class="quote-box">
-        <h2>AI-Generated Inspiration</h2>
+        <h2>⭐ Inspiration of the Day:</h2>
         <p id="quote">Loading quote...</p>
       </div>
     </div>
@@ -129,24 +129,36 @@
 
     const quotes = {
       happy: [
-        "Your smile is contagious! Keep spreading that joy! 😊",
-        "Happiness looks beautiful on you! ✨",
-        "The world is brighter because of your beautiful smile! 🌟"
+        "ابتسامتك معدية! استمري في نشر هذه السعادة! 😊\nYour smile is contagious! Keep spreading that joy! 😊",
+        "السعادة تليق بكِ، تبدين رائعة! ✨\nHappiness looks beautiful on you! ✨",
+        "العالم أكثر إشراقًا بسبب ابتسامتك الجميلة! 🌟\nThe world is brighter because of your beautiful smile! 🌟"
       ],
       sad: [
-        "Every storm runs out of rain. 🌈",
-        "You are stronger than you know. 💪",
-        "The sun will rise again, so be happy 🌅"
+        "كل عاصفة تنتهي، لا شيء يدوم للأبد. 🌈\nEvery storm runs out of rain. 🌈",
+        "أنتِ أقوى مما تعتقدين، والأيام الجميلة قادمة. 💪\nYou are stronger than you know. 💪",
+        "ستشرق الشمس من جديد، فابتسمي. 🌅\nThe sun will rise again, so be happy 🌅"
       ],
       angry: [
-        "Take a deep breath, life is beautiful when you smile 🌊",
-        "Your calm mind is your superpower 🧘",
-        "Let it go. You deserve peace 🤍"
+        "خذي نفسًا عميقًا، فالحياة جميلة عندما تبتسمين. 🌊\nTake a deep breath, life is beautiful when you smile 🌊",
+        "عقلك الهادئ هو قوتك الخارقة، لا تفقديها. 🧘\nYour calm mind is your superpower 🧘",
+        "اتركي ما يزعجك، فسلامك الداخلي يستحق. 🤍\nLet it go. You deserve peace 🤍"
       ],
       neutral: [
-        "You are exactly where you need to be. 🌟",
-        "Every moment is a fresh beginning. ⏳",
-        "Believe in yourself! 💎"
+        "أنتِ تمامًا في المكان الصحيح الآن. 🌟\nYou are exactly where you need to be. 🌟",
+        "كل لحظة بداية جديدة، اغتنميها. ⏳\nEvery moment is a fresh beginning. ⏳",
+        "ثقي بنفسك، فإمكاناتك بلا حدود. 💎\nBelieve in yourself! 💎"
+      ],
+      fearful: [
+        "حتى أطول الليالي تنتهي، وستشرق الشمس من جديد. 🌅\nEven the darkest night will end, and the sun will rise. 🌅",
+        "تنفسي بعمق، أنتِ في أمان الآن. 🌬️\nBreathe deeply. You are safe in this moment. 🌬️",
+        "أنتِ أقوى من خوفك، خطوة بخطوة. 🌿\nYou’re stronger than your fear — step by step, not all at once. 🌿",
+        "كل نبضة قلب دليل على أنكِ ما زلتِ تحاولين، وهذا كافٍ. 💖\nEvery heartbeat is proof you’re still trying, and that’s enough. 💖",
+        "خوفك يعني أنكِ تهتمين، دعيه يرشدك لا يتحكم بكِ. 🔆\nYour fear shows you care — let it guide, not control you. 🔆"
+      ],
+      surprised: [
+        "الحياة مليئة بالمفاجآت، استمتعي بروعتها! 🎇\nLife is full of surprises — enjoy the wonder! 🎇",
+        "أجمل اللحظات هي التي لم نتوقعها أبدًا. 💫\nSometimes the best moments are the ones we never saw coming. 💫",
+        "احتضني المفاجآت، فهي غالبًا ما تجلب السعادة. 🌈\nEmbrace the unexpected — it often brings the greatest joy. 🌈"
       ]
     };
 
@@ -154,7 +166,9 @@
       happy: "😊",
       sad: "😢",
       angry: "😠",
-      neutral: "😐"
+      neutral: "😐",
+      fearful: "😨",
+      surprised: "😲"
     };
 
     async function startVideo() {
@@ -186,7 +200,7 @@
           emotionEl.textContent = `${detected.charAt(0).toUpperCase() + detected.slice(1)} ${emoji}`;
 
           const list = quotes[detected] || quotes.neutral;
-          quoteEl.textContent = list[Math.floor(Math.random() * list.length)];
+          quoteEl.innerHTML = list[Math.floor(Math.random() * list.length)].replace(/\n/g, "<br>");
         }
       }, 2000);
     }
