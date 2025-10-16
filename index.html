@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Emotion Recognition - AI & Robotics Club</title>
+  <title>AI EMOTION Recognition - AI & Robotics Club</title>
 
   <script defer src="./face-api.min.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
@@ -96,12 +96,27 @@
       opacity: 0.7;
       letter-spacing: 0.5px;
     }
+    .header-glow {
+  color: #00ffff; /* bright cyan */
+  text-shadow: 0 0 10px #00ffffaa,
+               0 0 20px #00ffff88,
+               0 0 40px #00ffff66;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+
+.header-glow:hover {
+  text-shadow: 0 0 15px #22d3ee, 0 0 30px #00ffff, 0 0 50px #22d3ee;
+  transform: scale(1.03);
+}
+
   </style>
 </head>
 
 <body>
-  <h1 class="text-3xl font-bold text-cyan-400 mb-2">⭐ AI Emotion Recognition ⭐</h1>
-  <p class="text-cyan-300 mb-4">🤖 RAIC - AI & Robotics Club • Neural Network Emotion Analysis 🚀</p>
+<h1 class="text-3xl font-bold mb-2 header-glow">
+  ⭐ AI EMOTION Recognition ⭐
+</h1>  <p class="text-cyan-300 mb-4">🤖 RAIC - AI & Robotics Club • Neural Network Emotion Analysis 🚀</p>
 
   <div class="container">
     <div class="left">
@@ -130,38 +145,43 @@
 
     const quotes = {
       happy: [
-        "ابتسامتك معدية! استمري في نشر هذه السعادة! 😊\nYour smile is contagious! Keep spreading that joy! 😊",
-        "السعادة تليق بكِ، تبدين رائعة! ✨\nHappiness looks beautiful on you! ✨",
-        "العالم أكثر إشراقًا بسبب ابتسامتك الجميلة! 🌟\nThe world is brighter because of your beautiful smile! 🌟"
-      ],
-      sad: [
-        "كل عاصفة تنتهي، لا شيء يدوم للأبد. 🌈\nEvery storm runs out of rain. 🌈",
-        "أنتِ أقوى مما تعتقدين، والأيام الجميلة قادمة. 💪\nYou are stronger than you know. 💪",
-        "ستشرق الشمس من جديد، فابتسمي. 🌅\nThe sun will rise again, so be happy 🌅"
-      ],
-      angry: [
-        "خذي نفسًا عميقًا، فالحياة جميلة عندما تبتسمين. 🌊\nTake a deep breath, life is beautiful when you smile 🌊",
-        "عقلك الهادئ هو قوتك الخارقة، لا تفقديها. 🧘\nYour calm mind is your superpower 🧘",
-        "اتركي ما يزعجك، فسلامك الداخلي يستحق. 🤍\nLet it go. You deserve peace 🤍"
-      ],
-      neutral: [
-        "أنتِ تمامًا في المكان الصحيح الآن. 🌟\nYou are exactly where you need to be. 🌟",
-        "كل لحظة بداية جديدة، اغتنميها. ⏳\nEvery moment is a fresh beginning. ⏳",
-        "ثقي بنفسك، فإمكاناتك بلا حدود. 💎\nBelieve in yourself! 💎"
-      ],
-      fearful: [
-        "حتى أطول الليالي تنتهي، وستشرق الشمس من جديد. 🌅\nEven the darkest night will end, and the sun will rise. 🌅",
-        "تنفسي بعمق، أنتِ في أمان الآن. 🌬️\nBreathe deeply. You are safe in this moment. 🌬️",
-        "أنتِ أقوى من خوفك، خطوة بخطوة. 🌿\nYou’re stronger than your fear — step by step, not all at once. 🌿",
-        "كل نبضة قلب دليل على أنكِ ما زلتِ تحاولين، وهذا كافٍ. 💖\nEvery heartbeat is proof you’re still trying, and that’s enough. 💖",
-        "خوفك يعني أنكِ تهتمين، دعيه يرشدك لا يتحكم بكِ. 🔆\nYour fear shows you care — let it guide, not control you. 🔆"
-      ],
-      surprised: [
-        "الحياة مليئة بالمفاجآت، استمتعي بروعتها! 🎇\nLife is full of surprises — enjoy the wonder! 🎇",
-        "أجمل اللحظات هي التي لم نتوقعها أبدًا. 💫\nSometimes the best moments are the ones we never saw coming. 💫",
-        "احتضني المفاجآت، فهي غالبًا ما تجلب السعادة. 🌈\nEmbrace the unexpected — it often brings the greatest joy. 🌈"
-      ]
-    };
+    "😊 ابتسامتك معدية! استمري في نشر هذه السعادة!\nYour smile is contagious! Keep spreading that joy! 😊",
+    "✨ السعادة تليق بكِ، تبدين رائعة!\nHappiness looks beautiful on you! ✨",
+    "🌟 العالم أكثر إشراقًا بسبب ابتسامتك الجميلة!\nThe world is brighter because of your beautiful smile! 🌟"
+  ],
+
+  sad: [
+    "🌈 كل عاصفة تنتهي، لا شيء يدوم للأبد.\nEvery storm runs out of rain. 🌈",
+    "💪 أنتِ أقوى مما تعتقدين، والأيام الجميلة قادمة.\nYou are stronger than you know. 💪",
+    "🌅 ستشرق الشمس من جديد، فابتسمي.\nThe sun will rise again, so be happy 🌅"
+  ],
+
+  angry: [
+    "🌊 خذي نفسًا عميقًا، فالحياة جميلة عندما تبتسمين.\nTake a deep breath, life is beautiful when you smile 🌊",
+    "🧘 عقلك الهادئ هو قوتك الخارقة، لا تفقديها.\nYour calm mind is your superpower 🧘",
+    "🤍 اتركي ما يزعجك، فسلامك الداخلي يستحق.\nLet it go. You deserve peace 🤍"
+  ],
+
+  neutral: [
+    "🌟 أنتِ تمامًا في المكان الصحيح الآن.\nYou are exactly where you need to be. 🌟",
+    "⏳ كل لحظة بداية جديدة، اغتنميها.\nEvery moment is a fresh beginning. ⏳",
+    "💎 ثقي بنفسك، فإمكاناتك بلا حدود.\nBelieve in yourself! 💎"
+  ],
+
+  fearful: [
+    "🌅 حتى أطول الليالي تنتهي، وستشرق الشمس من جديد.\nEven the darkest night will end, and the sun will rise. 🌅",
+    "🌬️ تنفسي بعمق، أنتِ في أمان الآن.\nBreathe deeply. You are safe in this moment. 🌬️",
+    "🌿 أنتِ أقوى من خوفك، خطوة بخطوة.\nYou’re stronger than your fear — step by step, not all at once. 🌿",
+    "💖 كل نبضة قلب دليل على أنكِ ما زلتِ تحاولين، وهذا كافٍ.\nEvery heartbeat is proof you’re still trying, and that’s enough. 💖",
+    "🔆 خوفك يعني أنكِ تهتمين، دعيه يرشدك لا يتحكم بكِ.\nYour fear shows you care — let it guide, not control you. 🔆"
+  ],
+
+  surprised: [
+    "🎇 الحياة مليئة بالمفاجآت، استمتعي بروعتها!\nLife is full of surprises — enjoy the wonder! 🎇",
+    "💫 أجمل اللحظات هي التي لم نتوقعها أبدًا.\nSometimes the best moments are the ones we never saw coming. 💫",
+    "🌈 احتضني المفاجآت، فهي غالبًا ما تجلب السعادة.\nEmbrace the unexpected — it often brings the greatest joy. 🌈"
+  ]
+};
 
     const emojis = {
       happy: "😊",
