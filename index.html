@@ -5,139 +5,119 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AI Emotion Recognition - AI & Robotics Club</title>
 
-  <!-- React & Babel -->
-  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-  <script src="https://unpkg.com/@babel/standalone@7.22.20/babel.min.js"></script>
-
-  <!-- Tailwind CSS -->
+  <script defer src="https://cdn.jsdelivr.net/npm/face-api.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Face API -->
-  <script defer src="https://cdn.jsdelivr.net/npm/face-api.js"></script>
-
   <style>
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.5; }
+    body {
+      background-color: black;
+      color: white;
+      font-family: system-ui, sans-serif;
+      text-align: center;
+      padding: 20px;
     }
-    .animate-pulse {
-      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    video {
+      border: 3px solid #00ffff55;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 500px;
+      margin-top: 20px;
+    }
+    #quote {
+      font-size: 1.2rem;
+      margin-top: 20px;
+      color: #a5f3fc;
+    }
+    #emotion {
+      font-size: 2rem;
+      margin-top: 10px;
+    }
+    button {
+      background: linear-gradient(to right, #06b6d4, #9333ea);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      margin-top: 20px;
     }
   </style>
 </head>
-<body class="bg-black text-white">
-  <div id="root"></div>
+<body>
+  <h1 class="text-3xl font-bold text-cyan-400 mb-4">✨ AI Emotion Recognition ✨</h1>
+  <p class="text-cyan-300">AI & Robotics Club • Neural Network Emotion Analysis 🚀</p>
 
-  <script type="text/babel" data-presets="react,env">
-    const { useState, useRef, useEffect } = React;
+  <div>
+    <video id="video" autoplay muted playsinline></video>
+  </div>
 
-    const EmotionQuoteApp = () => {
-      const [emotion, setEmotion] = useState('neutral');
-      const [quote, setQuote] = useState('');
-      const [isWebcamActive, setIsWebcamActive] = useState(false);
-      const [error, setError] = useState('');
-      const videoRef = useRef(null);
-      const streamRef = useRef(null);
+  <button id="startBtn">▶ Activate Neural Scan</button>
 
-      const quotes = {
-        happy: [
-          "Your smile is contagious! Keep spreading that joy! 😊",
-          "Happiness looks beautiful on you! ✨",
-          "The world is brighter because of your smile! 🌟",
-          "Your positive energy is inspiring! Keep shining! ☀️",
-          "Joy is the best makeup—you're wearing it perfectly! 💫"
-        ],
-        sad: [
-          "Every storm runs out of rain. This too shall pass. 🌈",
-          "You are stronger than you know. Better days are coming. 💪",
-          "It's okay to not be okay. Take your time, you've got this. 🌸",
-          "Tough times don't last, but tough people do. 🌻",
-          "The sun will rise again, and so will you. 🌅"
-        ],
-        mad: [
-          "Take a deep breath. You have the power to choose peace. 🌊",
-          "Your calm mind is your superpower. 🧘",
-          "This feeling is temporary. Choose peace. ☮️",
-          "Let it go. You deserve happiness. 🕊️",
-          "Breathe in calm, breathe out frustration. 🌬️"
-        ],
-        neutral: [
-          "You are exactly where you need to be right now. 🌟",
-          "Every moment is a fresh beginning. ⏳",
-          "Your potential is limitless. 💎",
-          "Today is full of possibilities. 🌈",
-          "You are capable of amazing things! 💎"
-        ]
-      };
+  <div id="emotion">😐 Neutral</div>
+  <div id="quote">Loading quote...</div>
 
-      const emotionColors = {
-        happy: 'from-cyan-400 via-blue-500 to-purple-600',
-        sad: 'from-blue-600 via-indigo-700 to-purple-800',
-        mad: 'from-red-500 via-pink-600 to-purple-700',
-        neutral: 'from-indigo-500 via-purple-600 to-pink-600'
-      };
+  <script>
+    const video = document.getElementById("video");
+    const emotionEl = document.getElementById("emotion");
+    const quoteEl = document.getElementById("quote");
 
-      // 🧠 Load models
-      useEffect(() => {
-        const loadModels = async () => {
-          try {
-            await faceapi.nets.tinyFaceDetector.loadFromUri('/model');
-            await faceapi.nets.faceExpressionNet.loadFromUri('/model');
-            console.log("Models loaded ✅");
-          } catch (err) {
-            console.error("Error loading models:", err);
-          }
-        };
-        loadModels();
-      }, []);
+    const quotes = {
+      happy: [
+        "Your smile is contagious! Keep spreading that joy! 😊",
+        "Happiness looks beautiful on you! ✨",
+        "The world is brighter because of your smile! 🌟"
+      ],
+      sad: [
+        "Every storm runs out of rain. 🌈",
+        "You are stronger than you know. 💪",
+        "The sun will rise again. 🌅"
+      ],
+      angry: [
+        "Take a deep breath. 🌊",
+        "Your calm mind is your superpower. 🧘",
+        "Let it go. You deserve peace. ☮️"
+      ],
+      neutral: [
+        "You are exactly where you need to be. 🌟",
+        "Every moment is a fresh beginning. ⏳",
+        "Believe in yourself! 💎"
+      ]
+    };
 
-      useEffect(() => {
-        setQuote(quotes[emotion][Math.floor(Math.random() * quotes[emotion].length)]);
-      }, [emotion]);
+    async function startVideo() {
+      try {
+        await faceapi.nets.tinyFaceDetector.loadFromUri('/model');
+        await faceapi.nets.faceExpressionNet.loadFromUri('/model');
+        console.log("✅ Models loaded");
+        const stream = await navigator.mediaDevices.getUserMedia({ video: {} });
+        video.srcObject = stream;
+        detectEmotion();
+      } catch (err) {
+        alert("Error starting webcam: " + err);
+        console.error(err);
+      }
+    }
 
-      const startWebcam = async () => {
-        try {
-          const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } });
-          if (videoRef.current) {
-            videoRef.current.srcObject = stream;
-            streamRef.current = stream;
-            setIsWebcamActive(true);
-            setError('');
-            detectEmotions();
-          }
-        } catch (err) {
-          setError('Unable to access webcam. Please grant camera permissions.');
-          console.error('Webcam error:', err);
+    async function detectEmotion() {
+      const options = new faceapi.TinyFaceDetectorOptions();
+      setInterval(async () => {
+        const result = await faceapi
+          .detectSingleFace(video, options)
+          .withFaceExpressions();
+
+        if (result && result.expressions) {
+          const detected = Object.keys(result.expressions)
+            .reduce((a, b) => result.expressions[a] > result.expressions[b] ? a : b);
+
+          emotionEl.textContent = detected;
+          const list = quotes[detected] || quotes.neutral;
+          quoteEl.textContent = list[Math.floor(Math.random() * list.length)];
         }
-      };
+      }, 2000);
+    }
 
-      const stopWebcam = () => {
-        if (streamRef.current) {
-          streamRef.current.getTracks().forEach(track => track.stop());
-          streamRef.current = null;
-        }
-        if (videoRef.current) videoRef.current.srcObject = null;
-        setIsWebcamActive(false);
-      };
-
-      // 🎯 Real detection
-      const detectEmotions = async () => {
-        const interval = setInterval(async () => {
-          if (!videoRef.current || !streamRef.current) {
-            clearInterval(interval);
-            return;
-          }
-          try {
-            const detections = await faceapi
-              .detectSingleFace(videoRef.current, new faceapi.TinyFaceDetectorOptions())
-              .withFaceExpressions();
-
-            if (detections && detections.expressions) {
-              const detectedEmotion = Object.keys(detections.expressions)
-                .reduce((a, b) => detections.expressions[a] > detections.expressions[b] ? a : b);
-              setEmotion(detectedEmotion);
-            }
-          } catch (err) {
-            console.error("Detection error:", err);
-          }
+    document.getElementById("startBtn").addEventListener("click", startVideo);
+  </script>
+</body>
+</html>
