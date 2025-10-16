@@ -17,12 +17,16 @@
       padding: 20px;
     }
     video {
-      border: 3px solid #00ffff55;
-      border-radius: 10px;
-      width: 90%;
-      max-width: 500px;
-      margin-top: 20px;
-    }
+  border: 3px solid #00ffff55;
+  border-radius: 10px;
+  width: 60%;        /* ✅ Medium size */
+  max-width: 400px;  /* ✅ Prevents it from getting too big */
+  margin: 20px auto; /* ✅ Centers it */
+  display: block;    /* ✅ Makes margin auto work */
+  object-fit: cover; /* ✅ Keeps your face proportionate */
+  height: auto;
+}
+
     #quote {
       font-size: 1.2rem;
       margin-top: 20px;
@@ -46,7 +50,7 @@
 </head>
 <body>
   <h1 class="text-3xl font-bold text-cyan-400 mb-4">✨ AI Emotion Recognition ✨</h1>
-  <p class="text-cyan-300">AI & Robotics Club • Neural Network Emotion Analysis 🚀</p>
+  <p class="text-cyan-300"> 🤖 RAIC - AI & Robotics Club • Neural Network Emotion Analysis 🚀</p>
 
   <div>
     <video id="video" autoplay muted playsinline></video>
@@ -66,16 +70,16 @@
       happy: [
         "Your smile is contagious! Keep spreading that joy! 😊",
         "Happiness looks beautiful on you! ✨",
-        "The world is brighter because of your smile! 🌟"
+        "The world is brighter because of your beautiful smile! 🌟"
       ],
       sad: [
         "Every storm runs out of rain. 🌈",
         "You are stronger than you know. 💪",
-        "The sun will rise again. 🌅"
+        "The sun will rise again, so be happy 🌅"
       ],
       angry: [
-        "Take a deep breath. 🌊",
-        "Your calm mind is your superpower. 🧘",
+        "Take a deep breath, life is beautiful when you smile 🌊",
+        "Your calm mind is your superpower, keep that in mind 🧘",
         "Let it go. You deserve peace. ☮️"
       ],
       neutral: [
