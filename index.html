@@ -19,12 +19,12 @@
     video {
   border: 3px solid #00ffff55;
   border-radius: 10px;
-  width: 60%;        /* ✅ Medium size */
-  max-width: 400px;  /* ✅ Prevents it from getting too big */
-  margin: 20px auto; /* ✅ Centers it */
-  display: block;    /* ✅ Makes margin auto work */
-  object-fit: cover; /* ✅ Keeps your face proportionate */
-  height: auto;
+  width: 55%;        /* smaller width */
+  max-width: 380px;  /* caps the max size */
+  height: 280px;     /*  shorter height */
+  margin: 20px auto;
+  display: block;
+  object-fit: cover;
 }
 
     #quote {
@@ -60,7 +60,7 @@
   </style>
 </head>
 <body>
-  <h1 class="text-3xl font-bold text-cyan-400 mb-4">✨ AI Emotion Recognition ✨</h1>
+  <h1 class="text-3xl font-bold text-cyan-400 mb-4">⭐ AI Emotion Recognition ⭐</h1>
   <p class="text-cyan-300"> 🤖 RAIC - AI & Robotics Club • Neural Network Emotion Analysis 🚀</p>
 
   <div>
@@ -91,7 +91,7 @@
       angry: [
         "Take a deep breath, life is beautiful when you smile 🌊",
         "Your calm mind is your superpower, keep that in mind 🧘",
-        "Let it go. You deserve peace. ☮️"
+        "Let it go. You deserve peace 🤍"
       ],
       neutral: [
         "You are exactly where you need to be. 🌟",
@@ -134,6 +134,6 @@
 
     document.getElementById("startBtn").addEventListener("click", startVideo);
   </script>
-  <p class="credit">by Ruyuf Alharbi</p>
+  <p class="credit">By: Ruyuf Alharbi</p>
 </body>
 </html>
